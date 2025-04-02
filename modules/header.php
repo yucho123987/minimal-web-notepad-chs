@@ -19,9 +19,14 @@ function checkHeader($path, $line=null, $includeJS=false)
             $line = fgets(fopen($path, 'r'));
         }
     } //if the line isn't passed, get the first line from the file if it exists
-    $line = str_replace(array("\n", "\r"), '', $line); //remove any return characters from the string
+    if (!empty($line)) {
+      $line = str_replace(array("\n", "\r"), '', $line); //remove any return characters from the string
+    }
     // Header check could be done as a single line read in a seperate function e.g. $line = fgets(fopen($path, 'r')); //https://stackoverflow.com/questions/4521936/quickest-way-to-read-first-line-from-file
-    parse_str($line, $noteheader);
+    $noteheader = array();
+    if (!empty($line)) {
+      parse_str($line, $noteheader);
+    }
     $headerFound = false;
     if (isset($noteheader['noteName']) && isset($noteheader['noteHash'])) {
         if ($noteheader['noteName'] == $_GET['note'] && $noteheader['noteHash'] == base64_encode($_GET['note'])) {
