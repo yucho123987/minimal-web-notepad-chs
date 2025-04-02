@@ -1,84 +1,71 @@
 
-# minimal-web-notepad
+# minimal-web-notepad-chs
 
-This is a fork of the excellent [pereorga/minimalist-web-notepad](https://github.com/pereorga/minimalist-web-notepad) with additional functionality - the additional code does add size so not minimalist but still minimal at 10kb when minified and gzipped. If you want to go really minimalist then pereorga's implementation is under 3kb and that's not even minified! Password functionality is implemented by adding a header line to the text file which isn't displayed on the note ** be aware this does not encypt the contents, just limits access ** . The only server requirements are an Apache webserver with mod_rewrite enabled or an nginx webserver with ngx_http_rewrite_module and PHP enabled.
-
+这是 [domOrielton/minimal-web-notepad](https://github.com/domOrielton/minimal-web-notepad) 的克隆仓库，此仓库对原项目中的文本进行了简体中文汉化。
 ![edit screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_edit.png)
 
-Added functionality to [pereorga's](https://github.com/pereorga/minimalist-web-notepad) original:
+演示地址：https://notechs.rf.gd/
 
- - view option for note with URLs hyperlinked (very useful for mobile)
- - password protection with option for read only access
- - view only link
- - show last saved time of note
- - copy note url, view only url and note text to clipboard
- - view note in sans-serif or mono font
- - ability to download note
- - list of available notes
- - turn features on and off to reduce page size if needed
-
-See demo at http://note.rf.gd/ or http://note.rf.gd/some-note-name-here. The demo doesn't have https so you will see password warnings in your browser - *do not* use it for anything other than a test.
-
-Screenshots
+截图
 ------------
 
-**Note in View mode**
+**查看模式下的笔记**
 
-![view screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_view.png)
+![查看模式截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_view.png)
 
-**Responsive menu for mobile compatibility**
+**兼容移动端设备的响应式菜单**
 
-![mobile menu screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_mobile_menu_expanded.png) ![mobile menu screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_mobile_menu.png)
+![移动端菜单截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_mobile_menu_expanded.png) ![移动端菜单截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_mobile_menu.png)
 
-**Mono font**
+**Mono 字体**
 
-![mono display screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_mono.png)
+![mono 显示截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_mono.png)
 
-**Password protection**
+**密码保护**
 
-![password protection screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_password.png)
+![密码保护截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_password.png)
 
-**Password prompt for protected note**
+**受保护笔记的密码提示**
 
-![password prompt screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_password_prompt.png)
+![密码提示截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_password_prompt.png)
 
-The 'View as Read Only' link shows the note text and nothing else
+“以只读模式查看” 链接仅会显示笔记文本，而不会显示其他内容
 
-**Links for copying to clipboard**
+**用以复制内容到剪贴板的链接**
 
-![copy screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_copy.png)
+![复制链接截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_copy.png)
 
-**Note list** - generally only used for a URL that is not public, although the page is password protected
+**笔记列表** - 一般只用于不公开的 URL，尽管该页面有密码保护
 
-![note list screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_notelist.png)
+![笔记列表截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_notelist.png)
 
-If you don't want the note list to show then either set the $allow_noteslist parameter to false at the top of index.php or just rename `notelist.php` to something else. The password for the note list page is at the top of `notelist.php` - Protect\with('modules/protect_form.php', 'change the password here');
+如果您不想显示笔记列表，那么请在 index.php 顶部将 $allow_noteslist 参数设置为 false，或者重命名为其他名称。笔记列表的密码位于 `notelist.php` 的顶部 - Protect\with('modules/protect_form.php', '在这修改密码');
 
-**Alternative editing view**
+**备选编辑页面**
 
-There is also an alternative editing view that can be accessed by adding ?simple after the note e.g. /quick?simple. I personally find this view very useful for adding very quick notes on my phone - it has a small edit area at the top of the page and when you enter text and hit newline it adds it to the note and moves it to to the view that takes up the rest of the page. This view section shows URLs as clickable links. You can't set passwords on this view but it does honor them.
+还有另一种编辑视图，可通过在笔记 URL 后添加 ?simple 来访问，例如 /quick?simple。我个人认为此视图对于在手机上添加非常快速的笔记非常有用 - 它在页面顶部有一个小的编辑区域，当您输入文本并点击换行符时，它会将其添加到笔记中并将其移动到占据页面其余部分的视图。此视图部分将 URL 显示为可点击链接。您无法在此视图上设置密码，但它确实遵守密码。
 
-![copy screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_simple.png)
+![复制截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_simple.png)
 
-Installation
+安装
 ------------
 
-No configuration should be needed as long as mod_rewrite is enabled and the web server is allowed to write to the `_notes` data directory. This data directory is set in `config.php` so if you want to change it to the folder used by the original pereorga/minimalist-web-notepad version then change it there. All the notes are stored as text files so a server running Apache (or Nginx) should be enough, no databases required.
+只要启用 mod_rewrite 并且允许 Web 服务器写入 `_notes` 数据目录，就不需要任何配置。此数据目录已在 `config.php` 被设置，因此如果您想将其更改为原始 pereorga/minimalist-web-notepad 版本使用的文件夹，请在那里进行更改。所有笔记都存储为文本文件，因此一台运行着 Apache 或 Nginx 的服务器就足矣，不需要数据库。
 
-If notes aren't saving then please check the permissions on the `_notes` directory - 0755 or 744 should be all that is needed.
+如果笔记未被保存，请检查 `_notes` 目录的权限 - 其应为 0755 或 744。
 
-![permissions screenshot](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_permissions.png)
+![权限截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_permissions.png)
 
-There is also a `setup.php` page that can be used to check the `_notes` directory exists and can be written to. If you are having difficulty saving notes it may be worth deleting the `_notes` directory and then going to the `setup.php` page to create the folder. If all is working ok then you can delete the `setup.php` file if you wish.
+您也可以使用 `setup.php` 页面来检查 `_notes` 文件夹是否存在并可写。如果您在保存笔记时遇到问题，可能需要删除 `_notes` 文件夹并转到 `setup.php` 页面以创建该文件夹。若一切正常，则您可以删除 `setup.php` 文件（只要您愿意）。
 
-There may be scenarios where the $base_url variable in `config.php` needs to be replaced with the hardcoded URL path of your installation. If that is the case just replace the line in `config.php` beginning with  `$base_url = dirname('//'` with `$base_url ='http://actualURL.com/notes'` replacing actualURL.com/notes with whatever is relevant for your installation.
+在某些情况下，需要将位于 `config.php` 中的 $base_url 变量替换为您安装时的硬编码 URL 路径。倘若如此，仅需将 `config.php` 中以  `$base_url = dirname('//'` 开头的那行替换为 `$base_url ='http://actualURL.com/notes'`
+请将 actualURL.com/notes 替换为与您的安装相关的东西。
 
-### On Apache
+### 在 Apache 上运行
 
-You may need to enable mod_rewrite and set up `.htaccess` files in your site configuration.
-See [How To Set Up mod_rewrite for Apache](https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite-for-apache-on-ubuntu-14-04).
+您可能需要在您的网站配置中启用并设置 `.htaccess` 文件。参见《[如何为 Apache 配置 mod_rewrite](https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite-for-apache-on-ubuntu-14-04)》。
 
-## On nginx
+## 在 nginx 上运行
 
-On nginx, you will need to ensure nginx.conf is configured correctly to ensure the application works as expected.
-Please check the nginx.conf.example file or the [view without password issue](https://github.com/domOrielton/minimal-web-notepad/issues/4). Credit to [eonegh](https://github.com/eonegh) for the example file.
+在 Nginx 上，您需要确保 nginx.conf 被正确配置，以保证此项目以能预期情况运行。
+请检查 nginx.conf.example 文件或 [无密码查看的问题](https://github.com/domOrielton/minimal-web-notepad/issues/4)。感谢 [eonegh](https://github.com/eonegh)  提供的示例文件。
