@@ -1,6 +1,6 @@
 <?php
 require_once 'modules/protect.php';
-Protect\with('modules/protect_form.php', 'put your password here');
+Protect\with('modules/protect_form.php', '在这修改密码');
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,13 +26,13 @@ Protect\with('modules/protect_form.php', 'put your password here');
     function ago($time)
     {
         //https://css-tricks.com/snippets/php/time-ago-function/
-        $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
-        $lengths = array("60","60","24","7","4.35","12","10");
+        $periods = array("秒", "分钟", "小时", "天", "周", "月", "年");
+        $lengths = array("60","60","24","7","4.35","12");
 
         $now = time();
 
         $difference     = $now - $time;
-        $tense         = "ago";
+        $tense         = "前";
 
         for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
             $difference /= $lengths[$j];
@@ -41,17 +41,17 @@ Protect\with('modules/protect_form.php', 'put your password here');
         $difference = round($difference);
 
         if ($difference != 1) {
-            $periods[$j].= "s";
+            $periods[$j].= "";
         }
 
-        return "$difference $periods[$j] $tense ";
+        return "$difference $periods[$j]$tense ";
     }
 
     function human_filesize($bytes, $decimals = 2)
     {
         // from user contribs on php filesize page
         $sz = 'bkMGTP';
-        $szWords = array('bytes','Kb','Mb','Gb','Tb','Pb');
+        $szWords = array('b','Kb','Mb','Gb','Tb','Pb');
         $factor = floor((strlen($bytes) - 1) / 3);
         if (@$sz[$factor] == 'b') {
             $decimals = 0;
@@ -63,7 +63,7 @@ Protect\with('modules/protect_form.php', 'put your password here');
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Note list</title>
+	<title>笔记列表</title>
 	<script src="js/notelist.min.js"></script>
 	<link rel="shortcut icon" href="favicon.ico" />
 	<style>
@@ -81,16 +81,16 @@ Protect\with('modules/protect_form.php', 'put your password here');
 </style>
 </head>
 <body>
-<a href="<?php print $base_url; ?>">New note</a><br><br>
+<a href="<?php print $base_url; ?>">新建笔记</a><br><br>
 <table id="filterTable">
 	<tr>
-	<th><input type="text" id="filterNotes" onkeyup="filterTable()" placeholder="Filter by note title.." style="background:transparent;border:none;"></th>
+	<th><input type="text" id="filterNotes" onkeyup="filterTable()" placeholder="通过笔记标题筛选.." style="background:transparent;border:none;"></th>
 	</tr>
 </table>
 <table id="notelistTable">
-	<th onclick="sortTable(0)">Name</th>
-	<th onclick="sortTable(1)"><small>Last Modified</small></th>
-	<th><small>File Size</small></th>
+	<th onclick="sortTable(0)">名称</th>
+	<th onclick="sortTable(1)"><small>上次编辑时间</small></th>
+	<th><small>文件大小</small></th>
 	</tr>
 	<?php
     $files = array_diff(scandir($data_directory), array('.', '..','.htaccess'));
@@ -98,7 +98,7 @@ Protect\with('modules/protect_form.php', 'put your password here');
     $counterMax=500; //max number of notes to show
     foreach ($files as &$value) {
         if ($counter > $counterMax) {
-            echo "<tr><td>Max number of notes to list reached (". $counterMax . ")</td><td></td>";
+            echo "<tr><td>已达到列表允许的最大笔记数量 (". $counterMax . ")</td><td></td>";
             break; //have a max number of notes to show
         }
         echo "<tr><td style='padding-right: 20px;'><a href='".$value."' >".$value . "</a> </td>";
