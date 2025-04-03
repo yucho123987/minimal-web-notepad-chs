@@ -47,11 +47,11 @@ function toggleMonospace(lnk_obj) {
 }
 
 function deleteFile() {
-  var r = confirm("Are you sure you want to delete this note?");
+  var r = confirm("确定要删除这条笔记？");
   if (r == true) {
     document.getElementById('content').value = '';
     uploadContent();
-    alert('Note deleted');
+    alert('已删除笔记');
     // Note has been deleted so open a new note (going back to the same note, not a new note, looks confusing)
     var url = window.location.href;
     window.location.href = url.substring(0, url.lastIndexOf('/'));
