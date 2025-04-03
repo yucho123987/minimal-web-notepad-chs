@@ -59,7 +59,7 @@
 您也可以使用 `setup.php` 页面来检查 `_notes` 文件夹是否存在并可写。如果您在保存笔记时遇到问题，可能需要删除 `_notes` 文件夹并转到 `setup.php` 页面以创建该文件夹。若一切正常，则您可以删除 `setup.php` 文件（只要您愿意）。
 
 在某些情况下，需要将位于 `config.php` 中的 $base_url 变量替换为您安装时的硬编码 URL 路径。倘若如此，仅需将 `config.php` 中以  `$base_url = dirname('//'` 开头的那行替换为 `$base_url ='http://actualURL.com/notes'`
-请将 actualURL.com/notes 替换为与您的安装相关的东西。
+请将 actualURL.com/notes 替换为您的安装URL。
 
 ### 在 Apache 上运行
 
