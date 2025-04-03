@@ -29,7 +29,7 @@
 
 ![密码提示截图](https://raw.github.com/domOrielton/minimal-web-notepad/screenshots/mn_password_prompt.png)
 
-“以只读模式查看” 链接仅会显示笔记文本，而不会显示其他内容
+“允许以只读模式查看” 链接仅会显示笔记文本，而不会显示其他内容
 
 **用以复制内容到剪贴板的链接**
 
