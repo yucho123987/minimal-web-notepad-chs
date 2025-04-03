@@ -43,7 +43,7 @@ function submitPassword() {
     showRemovePassword();
     toggleModal_Password();
   } else {
-    pwdMessage.innerHTML = "Please enter a password<br>";
+    pwdMessage.innerHTML = "请输入密码<br>";
   }
 }
 
